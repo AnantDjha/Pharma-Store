@@ -1,8 +1,10 @@
 import axios from "axios"
 import { useState } from "react"
 import { useForm } from "react-hook-form"
+import { useNavigate } from "react-router-dom"
 export default function Login()
 {
+    const navigate = useNavigate()
     const {
         register,
         handleSubmit,
@@ -20,7 +22,12 @@ export default function Login()
             withCredentials:true
         })
         .then((response)=>{
+            
            setTemp(response.data)
+           if(response.data.message == "succesfull")
+           {
+            navigate("/")
+           }
         })
         .catch((e)=>{
             console.log(e);
