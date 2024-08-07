@@ -31,6 +31,7 @@ function App() {
         setUser(res.data);
       })
       .catch((e) => {
+        setUser({valid:false})
         console.log(e);
       });
   },[])

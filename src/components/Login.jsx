@@ -1,7 +1,8 @@
 import axios from "axios"
-import { useState } from "react"
+import { useContext, useState } from "react"
 import { useForm } from "react-hook-form"
 import { useNavigate } from "react-router-dom"
+import { userContext } from "../context/UserContext"
 export default function Login()
 {
     const navigate = useNavigate()
@@ -11,6 +12,7 @@ export default function Login()
         watch,
         formState:{error,isSubmitting}
     } = useForm()
+    const {user,setUser} = useContext(userContext)
     const [temp, setTemp] = useState(null)
     const onSubmit = (data)=>{
         axios.defaults.withCredentials = true
@@ -26,6 +28,7 @@ export default function Login()
            setTemp(response.data)
            if(response.data.message == "succesfull")
            {
+            setUser(response.data.user)
             navigate("/")
            }
         })
