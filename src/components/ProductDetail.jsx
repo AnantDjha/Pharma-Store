@@ -40,7 +40,7 @@ export default function ProductDetail() {
     }
 
     const param = useParams();
-    const [paramProduct,setParamProduct] = useState(products.find(a => a.id === parseInt(param.id)))
+    const [paramProduct,setParamProduct] = useState()
     const handleAdd = () => {
         const paramId = parseInt(param.id, 10);
         const list = JSON.parse(localStorage.getItem("cartItems") || '[]');
@@ -59,9 +59,12 @@ export default function ProductDetail() {
 
     };
 
+    useEffect(()=>{
+        setParamProduct(products.find(a => a.id === parseInt(param.id)))
+    },[])
 
     return (
-        !products ? (
+        !paramProduct ? (
             <div>ksdisdjjsdijids</div>
         ) : (
             <div className="mainDetail">
