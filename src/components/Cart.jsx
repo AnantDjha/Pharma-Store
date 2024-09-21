@@ -22,16 +22,8 @@ export default function Cart() {
 
 
     const fetcher = ()=>{
-        if(!user)
-            {
-                navigate("/");
-                navigate("/cart");
-                console.clear()
-                
-
-            }
-
-        if(!user.valid)
+        
+        if( user && !user.valid)
             {
                 let list = JSON.parse(localStorage.getItem("cartItems") || "[]")
                 // console.log(list);
@@ -46,7 +38,7 @@ export default function Cart() {
                 setCart(updatedCart);
 
             }
-        else{
+        else if(user && user.valid){
 
         
         axios.defaults.withCredentials = true;
@@ -79,8 +71,15 @@ export default function Cart() {
         }
     }
     useEffect(() => {
+        if(!user)
+            {
+                navigate("/");
+                navigate("/cart")
+                
+            }
+
         fetcher()
-    }, []);
+    }, [user]);
 
  
 
@@ -216,7 +215,7 @@ export default function Cart() {
 
                             <p ><b>Total Payable</b><span style={{fontWeight:"bold"}}>₹ {price.toFixed(2)}</span></p>
 
-                            <span><p><i>Payable amount</i><b>₹{price.toFixed(2)}</b></p> <Link to={user.valid ? "/payment":"/login"} state={{price,cartProduct,prod}}>Proceed</Link></span>
+                            <span><p><i>Payable amount</i><b>₹{price.toFixed(2)}</b></p> <Link to={user && user.valid ? "/payment":"/login"} state={{price,cartProduct,prod}}>Proceed</Link></span>
                         </div>
                     </div>
                 </div>

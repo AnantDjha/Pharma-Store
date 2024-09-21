@@ -84,31 +84,31 @@ export default function ProductDetail() {
                         </h1>
 
                         <p id="discount"> <i>Get upto </i> {paramProduct.discount}</p>
-                        <p>{paramProduct.star.map(starP => {
+                        <p>{paramProduct.star.map((starP,j) => {
                             if (starP === 1) {
                                 return (
 
-                                    <span><i className="fa fa-star fa-sm"></i></span>
+                                    <span key={j}><i className="fa fa-star fa-sm"></i></span>
                                 )
                             }
                             else if (starP === 0) {
                                 return (
 
-                                    <span><i className="fa fa-star-half-o fa-sm"></i></span>
+                                    <span key={j}><i className="fa fa-star-half-o fa-sm"></i></span>
                                 )
                             }
                             else {
                                 return (
 
-                                    <span><i className="fa fa-star-o fa-sm"></i></span>
+                                    <span key={j}><i className="fa fa-star-o fa-sm"></i></span>
                                 )
                             }
                         })}</p>
 
                         <h3>About this product</h3>
                         <ul>
-                            {paramProduct.about.map(q => {
-                                return <li key={q[0]}> {q}</li>
+                            {paramProduct.about.map((q, i) => {
+                                return <li key={i}> {q}</li>
                             })}
                         </ul>
 
