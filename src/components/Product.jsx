@@ -66,9 +66,9 @@ export default function Product()
                 <button className="decrease" disabled = {number === 1} onClick={()=>{setNumber(a => a-toIncrease)}}>{"<"}</button>
                 <button className="increase" disabled = {window.location.href.endsWith("products") ? number+toIncrease >= 12 : number+toIncrease >= 8} onClick={()=>{setNumber(a => a+toIncrease)}}>{">"}</button>
                 {window.location.href.endsWith("products") ? (
-                    products.filter(a => a.id >= number && a.id < number+toIncrease).map(item =>{
+                    products.filter(a => a.id >= number && a.id < number+toIncrease).map((item,i) =>{
                         return (
-                            <Link to= {`/productdetail/${item.id}`} className="ItemBoxProduct"  key={item.id} >
+                            <Link to= {`/productdetail/${item.id}`} className="ItemBoxProduct"  key={i} >
                             <img src={item.url} alt="" />
                             <div className="itemDetailProduct" >
                             <h2><b>{item.name}</b>  <span>{item.tag[0]}</span></h2>

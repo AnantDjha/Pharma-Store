@@ -21,7 +21,6 @@ export default function ProductDetail() {
             headers: {
                 "Content-Type": "application/json"
             },
-            withCredentials:true
         })
         .then((response)=>{
             console.log(response.data);
@@ -40,7 +39,7 @@ export default function ProductDetail() {
     }
 
     const param = useParams();
-    const [paramProduct,setParamProduct] = useState()
+    const [paramProduct,setParamProduct] = useState(null)
     const handleAdd = () => {
         const paramId = parseInt(param.id, 10);
         const list = JSON.parse(localStorage.getItem("cartItems") || '[]');

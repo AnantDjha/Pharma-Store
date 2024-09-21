@@ -90,32 +90,32 @@ export default function Home() {
 
 
                     <div className="secondOfView">
-                        {products.filter(a => a.id < 5).map(item => {
+                        {products.filter(a => a.id < 5).map((item,i) => {
                             return (
-                                <Link to={`productdetail/${item.id}`} className="ItemBox" key={item.id} >
+                                <Link to={`productdetail/${item.id}`} className="ItemBox" key={i} >
                                     <img src={item.url} alt="" loading="lazy" className="imageOfFilter"/>
                                     <div className="itemDetail"  >
                                     <h2><b>{item.name}</b>  <span>{item.tag[0]}</span></h2>
                                     <p>{item.quantity}</p>
                                         <h4>₹ {item.price} M.R.P</h4>
                                         <p style={{ color: "green" }}>Get upto <b >{item.discount}</b></p>
-                                        <p style={{ display: "flex", alignItems: "center" }}>{item.star.map(starP => {
+                                        <p style={{ display: "flex", alignItems: "center" }}>{item.star.map((starP,j) => {
                                             if (starP === 1) {
                                                 return (
 
-                                                    <span><i className="fa fa-star fa-sm"></i></span>
+                                                    <span key={j}><i className="fa fa-star fa-sm"></i></span>
                                                 )
                                             }
                                             else if (starP === 0) {
                                                 return (
 
-                                                    <span><i className="fa fa-star-half-o fa-sm"></i></span>
+                                                    <span key={j}><i className="fa fa-star-half-o fa-sm"></i></span>
                                                 )
                                             }
                                             else {
                                                 return (
 
-                                                    <span><i className="fa fa-star-o fa-sm"></i></span>
+                                                    <span key={j}><i className="fa fa-star-o fa-sm"></i></span>
                                                 )
                                             }
                                         })}</p>
@@ -141,32 +141,32 @@ export default function Home() {
 
 
                     <div className="secondOfView">
-                        {products.filter(a => a.id >= 5 && a.id < 9).map(item => {
+                        {products.filter(a => a.id >= 5 && a.id < 9).map((item,i) => {
                             return (
-                                <Link to={`productdetail/${item.id}`} className="ItemBox"  key={item.id} >
+                                <Link to={`productdetail/${item.id}`} className="ItemBox"  key={i} >
                                     <img src={item.url} alt="" loading="lazy" className="imageOfFilter" />
                                     <div className="itemDetail" >
                                     <h2><b>{item.name}</b>  <span>{item.tag[0]}</span></h2>
                                     <p>{item.quantity}</p>
                                         <h4>₹ {item.price} M.R.P</h4>
                                         <p style={{ color: "green" }}>Get upto <b >{item.discount}</b></p>
-                                        <p style={{ display: "flex", alignItems: "center" }}>{item.star.map(starP => {
+                                        <p style={{ display: "flex", alignItems: "center" }}>{item.star.map((starP,j) => {
                                             if (starP === 1) {
                                                 return (
 
-                                                    <span><i className="fa fa-star fa-sm"></i></span>
+                                                    <span key={j}><i className="fa fa-star fa-sm"></i></span>
                                                 )
                                             }
                                             else if (starP === 0) {
                                                 return (
 
-                                                    <span><i className="fa fa-star-half-o fa-sm"></i></span>
+                                                    <span key={j}><i className="fa fa-star-half-o fa-sm"></i></span>
                                                 )
                                             }
                                             else {
                                                 return (
 
-                                                    <span><i className="fa fa-star-o fa-sm"></i></span>
+                                                    <span key={j}><i className="fa fa-star-o fa-sm"></i></span>
                                                 )
                                             }
                                         })}</p>
