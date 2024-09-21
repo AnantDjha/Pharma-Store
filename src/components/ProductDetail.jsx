@@ -11,35 +11,35 @@ import { userContext } from "../context/UserContext";
 
 export default function ProductDetail() {
 
-    const [isInCart, setIsInCart] = useState(JSON.parse(localStorage.getItem("cartItems"),"[]"))
+    const [isInCart, setIsInCart] = useState(JSON.parse(localStorage.getItem("cartItems") || "[]"))
     const { user, setUser } = useContext(userContext)
     const navigate = useNavigate();
+
     const addToCart = () => {
         axios.defaults.withCredentials = true;
-        axios.post("https://medify-vtrr.onrender.com/cart",{ email: user.value.email, id: parseInt(param.id), quantity: 1 },{
-           
+        axios.post("https://medify-vtrr.onrender.com/cart", { email: user.value.email, id: parseInt(param.id), quantity: 1 }, {
+
             headers: {
                 "Content-Type": "application/json"
             },
         })
-        .then((response)=>{
-            console.log(response.data);
-            if(response.data.message == "succesfull")
-                {
+            .then((response) => {
+                console.log(response.data);
+                if (response.data.message == "succesfull") {
 
                     navigate("/cart");
                 }
-               
-        })
-        .catch((e)=>{
-            alert("something went wrong")
-        })
-        
+
+            })
+            .catch((e) => {
+                alert("something went wrong")
+            })
+
 
     }
 
     const param = useParams();
-    const [paramProduct,setParamProduct] = useState(null)
+    const [paramProduct, setParamProduct] = useState(null)
     const handleAdd = () => {
         const paramId = parseInt(param.id, 10);
         const list = JSON.parse(localStorage.getItem("cartItems") || '[]');
@@ -50,7 +50,7 @@ export default function ProductDetail() {
             navigate("/cart")
             return;
         } else {
-            list.push({ id: paramId, quantity: 1 }); 
+            list.push({ id: paramId, quantity: 1 });
             localStorage.setItem("cartItems", JSON.stringify(list));
         }
         navigate("/cart")
@@ -58,9 +58,9 @@ export default function ProductDetail() {
 
     };
 
-    useEffect(()=>{
+    useEffect(() => {
         setParamProduct(products.find(a => a.id === parseInt(param.id)))
-    },[])
+    }, [])
 
     return (
         !paramProduct ? (
@@ -68,7 +68,7 @@ export default function ProductDetail() {
         ) : (
             <div className="mainDetail">
                 <div className="detailBox">
-                    <h5 className="absoluter">Medify:{">" + paramProduct.name +" - " +paramProduct.quantity}</h5>
+                    <h5 className="absoluter">Medify:{">" + paramProduct.name + " - " + paramProduct.quantity}</h5>
                     <div className="image">
                         <LazyLoadImage src={paramProduct.url} alt={"loading......"} effect="blur" placeholderSrc={wellnesImg} />
                     </div>
@@ -84,7 +84,7 @@ export default function ProductDetail() {
                         </h1>
 
                         <p id="discount"> <i>Get upto </i> {paramProduct.discount}</p>
-                        <p>{paramProduct.star.map((starP,j) => {
+                        <p>{paramProduct.star.map((starP, j) => {
                             if (starP === 1) {
                                 return (
 
@@ -112,17 +112,15 @@ export default function ProductDetail() {
                             })}
                         </ul>
 
-                        <button onClick={() => 
-                            {
-                                if(!user.valid)
-                                    {
-                                        handleAdd()
-                                    }
-                                    else{
-                                        addToCart()
-                                    }
+                        <button onClick={() => {
+                            if (!user.valid) {
+                                handleAdd()
                             }
-                        }>{isInCart.find(b => b.id === paramProduct.id) ? "Go to cart" :"Add to cart"}</button>
+                            else {
+                                addToCart()
+                            }
+                        }
+                        }>{isInCart.find(b => b.id === paramProduct.id) ? "Go to cart" : "Add to cart"}</button>
                     </div>
                 </div>
             </div>
