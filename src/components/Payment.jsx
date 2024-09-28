@@ -30,7 +30,7 @@ export default function Payment() {
         }
 
         axios.defaults.withCredentials = true;
-        axios.get("http://localhost:5000/address" , {
+        axios.get("https://backendofmedify.onrender.com/address" , {
             headers:{
                 "Authorization" : "Bearer " + localStorage.getItem("token")
             }
@@ -57,7 +57,7 @@ export default function Payment() {
 
     const onSubmit = (data) => {
         axios.defaults.withCredentials = true;
-        axios.post("http://localhost:5000/addAddress", data , {
+        axios.post("https://backendofmedify.onrender.com/addAddress", data , {
             headers: {
                 "Content-Type": "application/json",
                 "Authorization" : "Bearer " + localStorage.getItem("token")

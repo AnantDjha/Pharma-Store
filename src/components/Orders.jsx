@@ -29,7 +29,7 @@ export default function Orders()
         }
 
         axios.defaults.withCredentials= true;
-        axios.get("http://localhost:5000/getOrders" ,{
+        axios.get("https://backendofmedify.onrender.com/getOrders" ,{
             headers:{
                 "Authorization" : "Bearer " + localStorage.getItem("token")
             }

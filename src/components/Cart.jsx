@@ -42,7 +42,7 @@ export default function Cart() {
 
         
         axios.defaults.withCredentials = true;
-        axios.post("http://localhost:5000/getCart", { email: user.value.email },
+        axios.post("https://backendofmedify.onrender.com/getCart", { email: user.value.email },
             {
                 headers: {
                     "Content-Type": "application/json",
@@ -97,7 +97,7 @@ export default function Cart() {
     const handleIncrease = (itemId)=>{
         if(!user.valid) return
         axios.defaults.withCredentials = true;
-        axios.post("http://localhost:5000/increaseQuantity", {email:user.value.email , id:itemId},
+        axios.post("https://backendofmedify.onrender.com/increaseQuantity", {email:user.value.email , id:itemId},
            { headers: {
                 "Content-Type": "application/json",
                 "Authorization" : "Bearer " + localStorage.getItem("token")
@@ -115,7 +115,7 @@ export default function Cart() {
     const handleDecrease = (itemId)=>{
         if(!user.valid) return
         axios.defaults.withCredentials = true;
-        axios.post("http://localhost:5000/decreaseQuantity", {email:user.value.email , id:itemId},
+        axios.post("https://backendofmedify.onrender.com/decreaseQuantity", {email:user.value.email , id:itemId},
            { headers: {
                 "Content-Type": "application/json",
                 "Authorization" : "Bearer " + localStorage.getItem("token")
@@ -133,7 +133,7 @@ export default function Cart() {
     const handleRemove = (itemId)=>{
         if(!user.valid) return
         axios.defaults.withCredentials = true;
-        axios.post("http://localhost:5000/remove", {email:user.value.email , id:itemId},
+        axios.post("https://backendofmedify.onrender.com/remove", {email:user.value.email , id:itemId},
            { headers: {
                 "Content-Type": "application/json",
                 "Authorization" : "Bearer " + localStorage.getItem("token")

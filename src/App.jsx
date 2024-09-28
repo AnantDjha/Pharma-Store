@@ -30,7 +30,7 @@ function App() {
       localStorage.setItem("token" , "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1lIjoiQW5hbnQgSmhhIiwiZW1haWwiOiJhbmFudGpoYTAxMTJAZ21haWwuY29tIiwiaWF0IjoxNzI3Mjg1MzkxfQ.385o1_WxAISOPuFDXXyypXC3G6jDLRvJBBtwG6jp4rA")
     }
     axios.defaults.withCredentials = true
-    axios.get("http://localhost:5000/user" , {
+    axios.get("https://backendofmedify.onrender.com/user" , {
       headers:{
         "Authorization" : "Bearer " + localStorage.getItem("token")
       }
