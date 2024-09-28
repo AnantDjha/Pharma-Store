@@ -29,7 +29,11 @@ export default function Orders()
         }
 
         axios.defaults.withCredentials= true;
-        axios.get("https://medify-vtrr.onrender.com/getOrders")
+        axios.get("http://localhost:5000/getOrders" ,{
+            headers:{
+                "Authorization" : "Bearer " + localStorage.getItem("token")
+            }
+        })
         .then((response)=>{
             
             setOrderedProduct(response.data);

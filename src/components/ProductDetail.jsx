@@ -17,10 +17,11 @@ export default function ProductDetail() {
 
     const addToCart = () => {
         axios.defaults.withCredentials = true;
-        axios.post("https://medify-vtrr.onrender.com/cart", { email: user.value.email, id: parseInt(param.id), quantity: 1 }, {
+        axios.post("http://localhost:5000/cart", { email: user.value.email, id: parseInt(param.id), quantity: 1 }, {
 
             headers: {
-                "Content-Type": "application/json"
+                "Content-Type": "application/json",
+                "Authorization" : "Bearer " + localStorage.getItem("token")
             },
         })
             .then((response) => {

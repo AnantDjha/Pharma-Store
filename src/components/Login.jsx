@@ -16,10 +16,11 @@ export default function Login()
     const [temp, setTemp] = useState(null)
     const onSubmit = (data)=>{
         axios.defaults.withCredentials = true
-        axios.post("https://medify-vtrr.onrender.com/login",data,{
+        axios.post("http://localhost:5000/login",data,{
            
             headers: {
-                "Content-Type": "application/json"
+                "Content-Type": "application/json",
+                "Authorization" : "Bearer " + localStorage.getItem("token")
             },
             withCredentials:true
         })
@@ -28,6 +29,7 @@ export default function Login()
            setTemp(response.data)
            if(response.data.message == "succesfull")
            {
+            localStorage.setItem("token" , response.data.token)
             setUser(response.data.user)
             navigate("/")
            }

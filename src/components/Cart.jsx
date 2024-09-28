@@ -42,10 +42,11 @@ export default function Cart() {
 
         
         axios.defaults.withCredentials = true;
-        axios.post("https://medify-vtrr.onrender.com/getCart", { email: user.value.email },
+        axios.post("http://localhost:5000/getCart", { email: user.value.email },
             {
-                Headers: {
-                    "Content-Type": "application/json"
+                headers: {
+                    "Content-Type": "application/json",
+                    "Authorization" : "Bearer " + localStorage.getItem("token")
 
                 }
             }
@@ -96,9 +97,10 @@ export default function Cart() {
     const handleIncrease = (itemId)=>{
         if(!user.valid) return
         axios.defaults.withCredentials = true;
-        axios.post("https://medify-vtrr.onrender.com/increaseQuantity", {email:user.value.email , id:itemId},
-           { Headers: {
-                "Content-Type": "application/json"
+        axios.post("http://localhost:5000/increaseQuantity", {email:user.value.email , id:itemId},
+           { headers: {
+                "Content-Type": "application/json",
+                "Authorization" : "Bearer " + localStorage.getItem("token")
 
             }}
         )
@@ -113,9 +115,10 @@ export default function Cart() {
     const handleDecrease = (itemId)=>{
         if(!user.valid) return
         axios.defaults.withCredentials = true;
-        axios.post("https://medify-vtrr.onrender.com/decreaseQuantity", {email:user.value.email , id:itemId},
-           { Headers: {
-                "Content-Type": "application/json"
+        axios.post("http://localhost:5000/decreaseQuantity", {email:user.value.email , id:itemId},
+           { headers: {
+                "Content-Type": "application/json",
+                "Authorization" : "Bearer " + localStorage.getItem("token")
 
             }}
         )
@@ -130,9 +133,10 @@ export default function Cart() {
     const handleRemove = (itemId)=>{
         if(!user.valid) return
         axios.defaults.withCredentials = true;
-        axios.post("https://medify-vtrr.onrender.com/remove", {email:user.value.email , id:itemId},
-           { Headers: {
-                "Content-Type": "application/json"
+        axios.post("http://localhost:5000/remove", {email:user.value.email , id:itemId},
+           { headers: {
+                "Content-Type": "application/json",
+                "Authorization" : "Bearer " + localStorage.getItem("token")
 
             }}
         )

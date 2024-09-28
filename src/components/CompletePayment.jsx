@@ -31,9 +31,10 @@ function CompletePayment() {
             navigate("/cart");
         }
         axios.defaults.withCredentials = true
-        axios.post("https://medify-vtrr.onrender.com/razorpay", {amount:price} ,{
+        axios.post("http://localhost:5000/razorpay", {amount:price} ,{
             headers:{
-                "Content-Type": "application/json"
+                "Content-Type": "application/json",
+                "Authorization" : "Bearer " + localStorage.getItem("token")
             }
         })
         .then((res)=>{
@@ -64,7 +65,7 @@ function CompletePayment() {
             "description": "Medicine purchased",
             handler: function (response){
                 axios.defaults.withCredentials = true;
-                axios.post("https://medify-vtrr.onrender.com/addPaymentToDB", {order_id:response.razorpay_order_id, 
+                axios.post("http://localhost:5000/addPaymentToDB", {order_id:response.razorpay_order_id, 
                     payment_id:response.razorpay_payment_id,
                     signature:response.razorpay_signature,
                     amount:information.amount,
@@ -72,7 +73,8 @@ function CompletePayment() {
                 },
                 {
                     headers:{
-                        "Content-Type": "application/json"
+                        "Content-Type": "application/json",
+                        "Authorization" : "Bearer " + localStorage.getItem("token")
 
                     }
                 }

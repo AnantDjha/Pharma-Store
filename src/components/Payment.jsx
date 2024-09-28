@@ -30,7 +30,11 @@ export default function Payment() {
         }
 
         axios.defaults.withCredentials = true;
-        axios.get("https://medify-vtrr.onrender.com/address")
+        axios.get("http://localhost:5000/address" , {
+            headers:{
+                "Authorization" : "Bearer " + localStorage.getItem("token")
+            }
+        })
             .then((response) => {
                 console.log(response.data[0].address);
                 setAddress(response.data[0].address);
@@ -53,9 +57,10 @@ export default function Payment() {
 
     const onSubmit = (data) => {
         axios.defaults.withCredentials = true;
-        axios.post("https://medify-vtrr.onrender.com/addAddress", data , {
+        axios.post("http://localhost:5000/addAddress", data , {
             headers: {
-                "Content-Type": "application/json"
+                "Content-Type": "application/json",
+                "Authorization" : "Bearer " + localStorage.getItem("token")
             },
         })
         .then((res)=>{

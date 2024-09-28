@@ -32,10 +32,11 @@ export default function NavBar()
             }
         else
        { axios.defaults.withCredentials = true;
-        axios.post("https://medify-vtrr.onrender.com/getCart", { email: user.value.email },
+        axios.post("http://localhost:5000/getCart", { email: user.value.email },
             {
-                Headers: {
-                    "Content-Type": "application/json"
+                headers: {
+                    "Content-Type": "application/json",
+                    "Authorization" : "Bearer " + localStorage.getItem("token")
 
                 }
             }
@@ -73,18 +74,7 @@ export default function NavBar()
                 </ul>
                 <div className="login">
                     <Link to="/login" onClick={()=>{
-                        if(!user.valid)
-                        {
-                            return;
-                        }
-                        axios.defaults.withCredentials = true;
-                        axios.get("https://medify-vtrr.onrender.com/logout")
-                        .then((res)=>{
-                            setUser(res.data);
-                        })
-                        .catch((e)=>{
-                            console.log(e);
-                        })
+                      localStorage.setItem("token" , "abc")
                     }}>{user && (!user.valid ? "Login" : "Logout")}</Link>
                 </div>
                 </div>
