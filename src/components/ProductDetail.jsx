@@ -14,8 +14,11 @@ export default function ProductDetail() {
     const [isInCart, setIsInCart] = useState(JSON.parse(localStorage.getItem("cartItems") || "[]"))
     const { user, setUser } = useContext(userContext)
     const navigate = useNavigate();
+    const [loading , setLoading] = useState(false)
 
     const addToCart = () => {
+
+        setLoading(true)
         axios.defaults.withCredentials = true;
         axios.post("https://backendofmedify.onrender.com/cart", { email: user.value.email, id: parseInt(param.id), quantity: 1 }, {
 
@@ -29,11 +32,13 @@ export default function ProductDetail() {
                 if (response.data.message == "succesfull") {
 
                     navigate("/cart");
+                    setLoading(false)
                 }
 
             })
             .catch((e) => {
                 alert("something went wrong")
+                setLoading(false)
             })
 
 
@@ -64,8 +69,10 @@ export default function ProductDetail() {
     }, [])
 
     return (
-        !paramProduct ? (
-            <div>ksdisdjjsdijids</div>
+        !paramProduct || loading ? (
+           <div className="loading">
+                <div ></div>
+            </div> 
         ) : (
             <div className="mainDetail">
                 <div className="detailBox">

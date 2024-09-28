@@ -10,6 +10,28 @@
     height: fit-content;
     margin-bottom: 3rem;
 }
+
+.loading{
+    width: 100vw;
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: white;
+    position: fixed;
+    top: 0;
+}
+.loading div{
+    width: 1.5rem;
+    height: 1.5rem;
+    background-color: #fff;
+    border-radius: 50%;
+    border:3px solid #32aeb1;
+    border-bottom: white;
+    animation-name: rotater;
+    animation-duration: 800s;
+    animation-iteration-count: infinite;
+}
 .btnAddMore{
     padding: 0.6rem 4rem;
     background-color: #32aeb1;
@@ -154,6 +176,7 @@
     color: rgb(205, 77, 99);
     font-size: 20px;
     transition-duration: 0.2s;
+    position: relative;
 }
 
 .buttons button:active{
@@ -254,6 +277,30 @@
 }
 .priceDetail span a:active{
     transform: scale(0.9);
+}
+.loader::before{
+    content: "";
+    width: 1rem;
+    height:1rem;
+    border: 2px solid rgb(205, 77, 99);
+    border-bottom: 2px solid white;
+    border-radius: 50%;
+    background-color: white;
+    position: absolute;
+    top: 15%;
+    left:20%;
+    animation-name: rotater;
+    animation-duration: 800s;
+    animation-iteration-count: infinite;
+}
+
+@keyframes rotater {
+    from{
+        transform: rotate(0deg);
+    }
+    to{
+        transform: rotate(360000deg);
+    }
 }
 
 @media only screen and (max-width:1490px)

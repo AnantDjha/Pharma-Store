@@ -19,6 +19,9 @@ export default function Cart() {
     const [cartProduct, setCart] = useState([]);
     const [price, setPrice] = useState([])
     const navigate = useNavigate()
+    const [loadingDec , setLoadingDec] = useState(false)
+    const [loadingInc , setLoadingInc] = useState(false)
+    const [loading , setLoading] = useState(false)
 
 
     const fetcher = ()=>{
@@ -95,7 +98,10 @@ export default function Cart() {
 
 
     const handleIncrease = (itemId)=>{
+
         if(!user.valid) return
+
+        setLoadingInc(true)
         axios.defaults.withCredentials = true;
         axios.post("https://backendofmedify.onrender.com/increaseQuantity", {email:user.value.email , id:itemId},
            { headers: {
@@ -106,14 +112,19 @@ export default function Cart() {
         )
         .then((response)=>{
             fetcher()
+            setLoadingInc(false)
         })
         .catch((e)=>{
+            setLoadingInc(false)
             console.log(e);
         })
+
     }
 
     const handleDecrease = (itemId)=>{
         if(!user.valid) return
+
+        setLoadingDec(true)
         axios.defaults.withCredentials = true;
         axios.post("https://backendofmedify.onrender.com/decreaseQuantity", {email:user.value.email , id:itemId},
            { headers: {
@@ -124,13 +135,17 @@ export default function Cart() {
         )
         .then((response)=>{
             fetcher()
+            setLoadingDec(false)
         })
         .catch((e)=>{
+            setLoadingDec(false)
             console.log(e);
         })
     }
 
     const handleRemove = (itemId)=>{
+
+        setLoading(true)
         if(!user.valid) return
         axios.defaults.withCredentials = true;
         axios.post("https://backendofmedify.onrender.com/remove", {email:user.value.email , id:itemId},
@@ -142,8 +157,10 @@ export default function Cart() {
         )
         .then((response)=>{
             fetcher()
+            setLoading(false)
         })
         .catch((e)=>{
+            setLoading(false)
             console.log(e);
         })
     }
@@ -162,6 +179,9 @@ export default function Cart() {
     }
 
         return (
+            loading ? <div className="loading">
+                <div ></div>
+            </div> :
             <div className="mainCart">
                 <h3>Order Summary</h3>
                 <div className="cartContent">
@@ -194,9 +214,9 @@ export default function Cart() {
                                                     else{
                                                         handleRemove(item.id)
                                                     }
-                                                }}>-</button>
+                                                }} className={loadingDec ? "loader" :""}>-</button>
                                             <b>{prod.find(a => a.id == item.id).quantity}</b>
-                                            <button  onClick={()=>{handleIncrease(item.id)}}>+</button>
+                                            <button  onClick={()=>{handleIncrease(item.id)}} className={loadingInc ? "loader" :""}>+</button>
                                         </div>
                                     </div>
                                 </div>
