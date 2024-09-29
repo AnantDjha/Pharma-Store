@@ -8,6 +8,7 @@ import {userContext} from "../context/UserContext"
 export default function Orders()
 {
     const {user ,setUser} = useContext(userContext)
+    const [loading , setLoading] = useState(true)
     const [orderedProduct , setOrderedProduct] = useState([])
     const [monthName,setMonthName] = useState(["January","February","March","April","May","June","July","August","September","October","November","December"])
     function capitalizeFirstLetter(string) {
@@ -37,12 +38,19 @@ export default function Orders()
         .then((response)=>{
             
             setOrderedProduct(response.data);
+            setLoading(false)
         })
         .catch((e)=>{
+            setLoading(false)
             alert(e)
         })
     },[user])
     return (
+
+        loading ? <div className="loading">
+            <div ></div>
+        </div>
+        :
         <div className="mainOrders">
             <div className="orderDetailBox">
                <div className="myOrder">

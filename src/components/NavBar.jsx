@@ -18,6 +18,10 @@ export default function NavBar()
     const menuRef = useRef();
     const {user,setUser} = useContext(userContext)
 
+    const andarLe = ()=>{
+        menuRef.current.className = "linksToMove"
+    }
+
     useEffect(()=>{
         if(!user)
             {
@@ -67,15 +71,16 @@ export default function NavBar()
                     menuRef.current.className = "linksToMove"
                 }} /></p>
                 <ul>
-                    <Link to="/"><li>Home</li></Link>
-                    <Link to = "/products"><li>Products</li></Link>
-                    <Link to = "/"><li>About</li></Link>
-                    <Link to = "/orders"><li>My Orders</li></Link>
+                    <Link to="/"  onClick={andarLe}><li>Home</li></Link>
+                    <Link to = "/products" onClick={andarLe}><li>Products</li></Link>
+                    <Link to = "https://en.wikipedia.org/wiki/Pharmacy_(shop)" target="_blank" onClick={andarLe}><li>About</li></Link>
+                    <Link to = "/orders" onClick={andarLe}><li>My Orders</li></Link>
                 </ul>
                 <div className="login">
                     <Link to="/login" onClick={()=>{
                       localStorage.setItem("token" , "abc")
-                    }}>{user && (!user.valid ? "Login" : "Logout")}</Link>
+                      andarLe
+                    }} >{user && (!user.valid ? "Login" : "Logout")}</Link>
                 </div>
                 </div>
                 

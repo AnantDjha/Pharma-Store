@@ -28,7 +28,7 @@ function App() {
   useEffect(()=>{
     if(!localStorage.getItem("token"))
     {
-      localStorage.setItem("token" , "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1lIjoiQW5hbnQgSmhhIiwiZW1haWwiOiJhbmFudGpoYTAxMTJAZ21haWwuY29tIiwiaWF0IjoxNzI3Mjg1MzkxfQ.385o1_WxAISOPuFDXXyypXC3G6jDLRvJBBtwG6jp4rA")
+      localStorage.setItem("token" , "")
     }
     axios.defaults.withCredentials = true
     axios.get("https://backendofmedify.onrender.com/user" , {
