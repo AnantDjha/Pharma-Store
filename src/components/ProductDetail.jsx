@@ -19,10 +19,10 @@ export default function ProductDetail() {
     const [reRender , setRerender] = useState(true)
 
     const addToCart = () => {
-
+        
         setLoading(true)
         axios.defaults.withCredentials = true;
-        axios.post("https://backendofmedify.onrender.com/cart", { email: user.value.email, id: parseInt(param.id), quantity: 1 }, {
+        axios.post("https://backendofmedify.onrender.com/cart", { email: user.value?.email, id: parseInt(param.id), quantity: 1 }, {
 
             headers: {
                 "Content-Type": "application/json",
@@ -71,13 +71,14 @@ export default function ProductDetail() {
 
     };
 
+    
     useEffect(() => {
         setParamProduct(products.find(a => a.id === parseInt(param.id)))
     }, [])
 
     useEffect(()=>{
         axios.defaults.withCredentials = true;
-        axios.post("https://backendofmedify.onrender.com/getCart", { email: user.value.email },
+        axios.post("https://backendofmedify.onrender.com/getCart", { email: user.value?.email },
             {
                 headers: {
                     "Content-Type": "application/json",
