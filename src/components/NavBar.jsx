@@ -9,9 +9,9 @@ import axios from "axios"
 import { faCartFlatbedSuitcase } from "@fortawesome/free-solid-svg-icons/faCartFlatbedSuitcase"
 
 
-export default function NavBar()
+export default function NavBar({prod , setProd})
 {
-    const [prod,setProd] = useState([])
+    // const [prod,setProd] = useState([])
 
     
 

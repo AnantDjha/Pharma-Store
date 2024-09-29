@@ -10,7 +10,7 @@ import axios from "axios";
 import { userContext } from "../context/UserContext";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
-export default function ProductDetail() {
+export default function ProductDetail({prod , setProd}) {
 
     const [isInCart, setIsInCart] = useState(JSON.parse(localStorage.getItem("cartItems") || "[]"))
     const { user, setUser } = useContext(userContext)
@@ -89,6 +89,7 @@ export default function ProductDetail() {
                 let list = response.data
                 localStorage.setItem("cartItems",JSON.stringify(list))
                 isInCart(list)
+                setProd(list)
 
             })
             .catch((e) => {
