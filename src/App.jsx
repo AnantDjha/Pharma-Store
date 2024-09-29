@@ -46,35 +46,13 @@ function App() {
         console.log(e);
       });
   },[])
-
-  useEffect(()=>{
-    axios.defaults.withCredentials = true;
-        axios.post("https://backendofmedify.onrender.com/getCart", { email: user.value.email },
-            {
-                headers: {
-                    "Content-Type": "application/json",
-                    "Authorization" : "Bearer " + localStorage.getItem("token")
-
-                }
-            }
-        )
-            .then((response) => {
-                let list = response.data
-                localStorage.setItem("cartItems",JSON.stringify(list))
-                setProd(list)
-
-            })
-            .catch((e) => {
-                console.log(e);
-            })
-  }, [])
   
   const router = createBrowserRouter([
     { path: "/", element: <><Home /><Search /><NavBar /></> },
     { path: "/products/:value", element: <><Tags /><Product/><Search /><NavBar /></> },
     { path: "/products", element: <><Tags /><Product /><Search /><NavBar /></> },
-    { path: "/productdetail/:id", element: <><ProductDetail prod ={prod} setProd = {setProd}/><Search /><NavBar /></> },
-    { path:"/cart" , element:<><Cart value={{prod, setProd}}/><Search /><NavBar prod ={prod} setProd = {setProd}/></>},
+    { path: "/productdetail/:id", element: <><ProductDetail value = {{prod, setProd}}/><Search /><NavBar /></> },
+    { path:"/cart" , element:<><Cart value={{prod, setProd}}/><Search /><NavBar /></>},
     {path:"/login",element:<><Login/><NavBar/></>},
     {path:"/payment",element:<><Payment/></>},
     {path:"/completePayment",element:<><Payment/><CompletePayment/></>},
