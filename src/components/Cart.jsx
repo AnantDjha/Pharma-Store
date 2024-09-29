@@ -19,8 +19,8 @@ export default function Cart() {
     const [cartProduct, setCart] = useState([]);
     const [price, setPrice] = useState([])
     const navigate = useNavigate()
-    const [loadingDec , setLoadingDec] = useState(false)
-    const [loadingInc , setLoadingInc] = useState(false)
+    const [loadingDec , setLoadingDec] = useState(-1)
+    const [loadingInc , setLoadingInc] = useState(-1)
     const [loading , setLoading] = useState(false)
 
 
@@ -101,7 +101,7 @@ export default function Cart() {
 
         if(!user.valid) return
 
-        setLoadingInc(true)
+        setLoadingInc(itemId)
         axios.defaults.withCredentials = true;
         axios.post("https://backendofmedify.onrender.com/increaseQuantity", {email:user.value.email , id:itemId},
            { headers: {
@@ -112,10 +112,10 @@ export default function Cart() {
         )
         .then((response)=>{
             fetcher()
-            setLoadingInc(false)
+            setLoadingInc(-1)
         })
         .catch((e)=>{
-            setLoadingInc(false)
+            setLoadingInc(-1)
             console.log(e);
         })
 
@@ -124,7 +124,7 @@ export default function Cart() {
     const handleDecrease = (itemId)=>{
         if(!user.valid) return
 
-        setLoadingDec(true)
+        setLoadingDec(itemId)
         axios.defaults.withCredentials = true;
         axios.post("https://backendofmedify.onrender.com/decreaseQuantity", {email:user.value.email , id:itemId},
            { headers: {
@@ -135,10 +135,10 @@ export default function Cart() {
         )
         .then((response)=>{
             fetcher()
-            setLoadingDec(false)
+            setLoadingDec(-1)
         })
         .catch((e)=>{
-            setLoadingDec(false)
+            setLoadingDec(-1)
             console.log(e);
         })
     }
@@ -188,7 +188,7 @@ export default function Cart() {
                     <div className="itemSummary">
                         <p><b>Products</b></p>
                         <div className="item">
-                            {cartProduct.map(item => {
+                            {cartProduct.map((item , i) => {
                                 return (<div className="itemBoxCart" key={item.id}>
                                     <div className="temper">
                                        <img src={item.url} alt="" />
@@ -214,9 +214,9 @@ export default function Cart() {
                                                     else{
                                                         handleRemove(item.id)
                                                     }
-                                                }} className={loadingDec ? "loader" :""}>-</button>
+                                                }} className={loadingDec == item.id ? "loader" :""}>-</button>
                                             <b>{prod.find(a => a.id == item.id).quantity}</b>
-                                            <button  onClick={()=>{handleIncrease(item.id)}} className={loadingInc ? "loader" :""}>+</button>
+                                            <button  onClick={()=>{handleIncrease(item.id)}} className={loadingInc == item.id ? "loader" :""}>+</button>
                                         </div>
                                     </div>
                                 </div>

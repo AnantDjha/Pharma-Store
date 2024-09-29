@@ -109,6 +109,17 @@
     width: 16rem;
     cursor: pointer;
 }
+
+.text button:disabled{
+    background-color: transparent;
+    color: black;
+    border: none;
+    font-size: 18px;
+    width: 100%;
+    /* background-color: red; */
+    text-align: start;
+    padding: 0;
+}
 .text ul li{
     /* list-style: none; */
     margin: 0.5rem 0;

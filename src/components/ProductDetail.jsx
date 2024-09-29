@@ -5,9 +5,10 @@ import { useContext, useState, useEffect, useRef } from "react";
 import { productContext } from "../context/ProductContext";
 import { LazyLoadImage } from "react-lazy-load-image-component";
 import wellnesImg from "../assets/placeholder.svg"
-import { faLaptopMedical } from "@fortawesome/free-solid-svg-icons";
+import { faCheckCircle, faLaptopMedical } from "@fortawesome/free-solid-svg-icons";
 import axios from "axios";
 import { userContext } from "../context/UserContext";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 export default function ProductDetail() {
 
@@ -15,6 +16,7 @@ export default function ProductDetail() {
     const { user, setUser } = useContext(userContext)
     const navigate = useNavigate();
     const [loading , setLoading] = useState(false)
+    const [reRender , setRerender] = useState(true)
 
     const addToCart = () => {
 
@@ -31,8 +33,12 @@ export default function ProductDetail() {
                 console.log(response.data);
                 if (response.data.message == "succesfull") {
 
-                    navigate("/cart");
                     setLoading(false)
+                    // navigate("/cart");
+                    // navigate(-1)
+                    setRerender(!reRender)
+
+
                 }
 
             })
@@ -60,13 +66,36 @@ export default function ProductDetail() {
             localStorage.setItem("cartItems", JSON.stringify(list));
         }
         navigate("/cart")
-
+        navigate(-1)
+        setRerender(!reRender)
 
     };
 
     useEffect(() => {
         setParamProduct(products.find(a => a.id === parseInt(param.id)))
     }, [])
+
+    useEffect(()=>{
+        axios.defaults.withCredentials = true;
+        axios.post("https://backendofmedify.onrender.com/getCart", { email: user.value.email },
+            {
+                headers: {
+                    "Content-Type": "application/json",
+                    "Authorization" : "Bearer " + localStorage.getItem("token")
+
+                }
+            }
+        )
+            .then((response) => {
+                let list = response.data
+                localStorage.setItem("cartItems",JSON.stringify(list))
+                isInCart(list)
+
+            })
+            .catch((e) => {
+                console.log(e);
+            })
+        }, [reRender])
 
     return (
         !paramProduct || loading ? (
@@ -128,7 +157,7 @@ export default function ProductDetail() {
                                 addToCart()
                             }
                         }
-                        }>{isInCart.find(b => b.id === paramProduct.id) ? "Go to cart" : "Add to cart"}</button>
+                        } disabled = {isInCart.find(b => b.id === paramProduct.id) != null}>{isInCart.find(b => b.id === paramProduct.id) ? <b><FontAwesomeIcon icon={faCheckCircle} style={{color:"green"}}/> Added to Cart</b> : "Add to cart"}</button>
                     </div>
                 </div>
             </div>
