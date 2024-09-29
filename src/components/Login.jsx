@@ -37,7 +37,6 @@ export default function Login() {
                 console.log(e);
                 setTemp({completed:false , message:"Something went wrong"})
             })
-        console.log(data);
     }
     return (
         <div className="main-login">
@@ -67,6 +66,7 @@ export default function Login() {
 
       <div className="navi">
         <span>Dont't have an Account?</span> <Link to="/register" >Register</Link>
+        <p>If you are loged out and dont want to register than simply visit home page and refresh</p>
       </div>
     </div>
 

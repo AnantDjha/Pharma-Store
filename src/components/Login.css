@@ -88,6 +88,11 @@ input[type="submit"]:disabled {
 .navi span{
     color: black;
 }
+.navi p{
+    width: 300px;
+    font-size: 12px;
+    margin-top: 0.5rem;
+}
 
 @media (max-width: 500px) {
     .main-login form {
