@@ -86,7 +86,7 @@ export default function NavBar({prod , setProd})
                 
 
                 <div className="cart">
-                    <Link to="/cart"><FontAwesomeIcon icon={faCartShopping} style={{color:"white",fontSize:"20px"}}/><b>{prod.length}</b></Link>
+                    <Link to="/cart"><FontAwesomeIcon icon={faCartShopping} style={{color:"white",fontSize:"20px"}}/><b>{prod?.length}</b></Link>
                 </div>
             </nav>
         </div>
