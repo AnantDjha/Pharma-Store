@@ -15,6 +15,7 @@ import Payment from './components/Payment';
 import CompletePayment from './components/CompletePayment';
 import Orders from './components/Orders';
 import OrderDetail from './components/OrderDetail';
+import Register from './components/Register';
 
 function App() {
   const { products, setProducts } = useContext(productContext);
@@ -52,11 +53,12 @@ function App() {
     { path: "/products", element: <><Tags /><Product /><Search /><NavBar /></> },
     { path: "/productdetail/:id", element: <><ProductDetail value = {{prod, setProd}}/><Search /><NavBar /></> },
     { path:"/cart" , element:<><Cart value={{prod, setProd}}/><Search /><NavBar /></>},
-    {path:"/login",element:<><Login/></>},
+    {path:"/login",element:<><Login/><NavBar/></>},
     {path:"/payment",element:<><Payment/></>},
     {path:"/completePayment",element:<><Payment/><CompletePayment/></>},
     {path:"/orders",element:<><Orders/><Search /><NavBar /></>},
-    {path:"/order-detail/:id",element:<><OrderDetail/><Search /><NavBar /></>}
+    {path:"/order-detail/:id",element:<><OrderDetail/><Search /><NavBar /></>},
+    {path:"/register",element:<><Register/><NavBar/></>},
   ]);
 
   return (
