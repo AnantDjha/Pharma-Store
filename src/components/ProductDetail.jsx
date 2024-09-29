@@ -34,8 +34,8 @@ export default function ProductDetail() {
                 if (response.data.message == "succesfull") {
 
                     setLoading(false)
-                    navigate("/cart");
-                    navigate(-1)
+                    navigate("/products");
+                    navigate("/cart")
                     setRerender(!reRender)
                 }
 
@@ -74,27 +74,27 @@ export default function ProductDetail() {
         setParamProduct(products.find(a => a.id === parseInt(param.id)))
     }, [])
 
-    // useEffect(()=>{
-    //     axios.defaults.withCredentials = true;
-    //     axios.post("https://backendofmedify.onrender.com/getCart", { email: user?.value?.email },
-    //         {
-    //             headers: {
-    //                 "Content-Type": "application/json",
-    //                 "Authorization" : "Bearer " + localStorage.getItem("token")
+    useEffect(()=>{
+        axios.defaults.withCredentials = true;
+        axios.post("https://backendofmedify.onrender.com/getCart", { email: user?.value?.email },
+            {
+                headers: {
+                    "Content-Type": "application/json",
+                    "Authorization" : "Bearer " + localStorage.getItem("token")
 
-    //             }
-    //         }
-    //     )
-    //         .then((response) => {
-    //             let list = response.data
-    //             localStorage.setItem("cartItems",JSON.stringify(list))
-    //             isInCart(list)
+                }
+            }
+        )
+            .then((response) => {
+                let list = response.data
+                localStorage.setItem("cartItems",JSON.stringify(list))
+                isInCart(list)
 
-    //         })
-    //         .catch((e) => {
-    //             console.log(e);
-    //         })
-    //     }, [reRender])
+            })
+            .catch((e) => {
+                console.log(e);
+            })
+        }, [reRender])
 
     return (
         !paramProduct || loading ? (
