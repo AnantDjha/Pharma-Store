@@ -80,7 +80,7 @@ export default function NavBar()
                     <Link to="/login" onClick={()=>{
                       localStorage.setItem("token" , "abc")
                       andarLe
-                    }} >{user && (!user.valid ? "Login" : "Logout")}</Link>
+                    }} >{user && (user.valid && user.value.email == "anantjha0112@gmail.com" ? "Login" : "Logout")}</Link>
                 </div>
                 </div>
                 
