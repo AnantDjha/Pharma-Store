@@ -16,7 +16,7 @@ export default function Login() {
     const [temp, setTemp] = useState(null)
     const onSubmit = (data) => {
         axios.defaults.withCredentials = true
-        axios.post("https://backendofmedify.onrender.com/login", data, {
+        axios.post("http://localhost:5000/login", data, {
 
             headers: {
                 "Content-Type": "application/json",

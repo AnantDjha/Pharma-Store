@@ -3,17 +3,18 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faCartFlatbed, faCartShopping, faMultiply } from '@fortawesome/free-solid-svg-icons'
 import { faBars } from '@fortawesome/free-solid-svg-icons'
 import { useContext, useEffect, useRef, useState } from "react"
-import { Link } from "react-router-dom"
+import { Link, useNavigate } from "react-router-dom"
 import { userContext } from "../context/UserContext"
 import axios from "axios"
 import { faCartFlatbedSuitcase } from "@fortawesome/free-solid-svg-icons/faCartFlatbedSuitcase"
+import { productContext } from "../context/ProductContext"
 
 
 export default function NavBar()
 {
     const [prod,setProd] = useState([])
-
-    
+    const navigate = useNavigate()
+    const { length, setLength } = useContext(productContext);
 
     const menuRef = useRef();
     const {user,setUser} = useContext(userContext)
@@ -36,7 +37,7 @@ export default function NavBar()
             }
         else
        { axios.defaults.withCredentials = true;
-        axios.post("https://backendofmedify.onrender.com/getCart", { email: user.value.email },
+        axios.post("http://localhost:5000/getCart", { email: user.value.email },
             {
                 headers: {
                     "Content-Type": "application/json",
@@ -48,7 +49,7 @@ export default function NavBar()
             .then((response) => {
                 let list = response.data
                 localStorage.setItem("cartItems",JSON.stringify(list))
-                setProd(list)
+                setLength(list)
 
             })
             .catch((e) => {
@@ -77,16 +78,19 @@ export default function NavBar()
                     <Link to = "/orders" onClick={andarLe}><li>My Orders</li></Link>
                 </ul>
                 <div className="login">
-                    <Link to="/login" onClick={()=>{
-                      localStorage.setItem("token" , "abc")
-                      andarLe
+                    <Link onClick={()=>{
+                      localStorage.setItem("token" , "abc");
+                      andarLe()
+                      navigate("/login")
+                      setLength([])
+                      
                     }} >{user && (user.valid && user.value.email == "anantjha0112@gmail.com" ? "Login" : "Logout")}</Link>
                 </div>
                 </div>
                 
 
                 <div className="cart">
-                    <Link to="/cart"><FontAwesomeIcon icon={faCartShopping} style={{color:"white",fontSize:"20px"}}/><b>{prod.length}</b></Link>
+                    <Link to="/cart"><FontAwesomeIcon icon={faCartShopping} style={{color:"white",fontSize:"20px"}}/><b>{length.length}</b></Link>
                 </div>
             </nav>
         </div>

@@ -22,7 +22,7 @@ export default function ProductDetail() {
         
         setLoading(true)
         axios.defaults.withCredentials = true;
-        axios.post("https://backendofmedify.onrender.com/cart", { email: user?.value?.email, id: parseInt(param.id), quantity: 1 }, {
+        axios.post("http://localhost:5000/cart", { email: user?.value?.email, id: parseInt(param.id), quantity: 1 }, {
 
             headers: {
                 "Content-Type": "application/json",
@@ -33,10 +33,8 @@ export default function ProductDetail() {
                 console.log(response.data);
                 if (response.data.message == "succesfull") {
 
-                    setLoading(false)
-                    navigate("/products");
                     navigate("/cart")
-                    setRerender(!reRender)
+                    setLoading(false)
                 }
 
             })
@@ -76,7 +74,7 @@ export default function ProductDetail() {
 
     useEffect(()=>{
         axios.defaults.withCredentials = true;
-        axios.post("https://backendofmedify.onrender.com/getCart", { email: user?.value?.email },
+        axios.post("http://localhost:5000/getCart", { email: user?.value?.email },
             {
                 headers: {
                     "Content-Type": "application/json",

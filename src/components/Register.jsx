@@ -19,7 +19,7 @@ export default function Register() {
   const onSubmit = (data) => {
     axios.defaults.withCredentials = true;
     axios
-      .post("https://backendofmedify.onrender.com/register", data, {
+      .post("http://localhost:5000/register", data, {
         headers: {
           "Content-Type": "application/json",
           Authorization: "Bearer " + localStorage.getItem("token"),

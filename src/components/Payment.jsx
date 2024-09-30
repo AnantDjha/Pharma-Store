@@ -30,7 +30,7 @@ export default function Payment() {
         }
 
         axios.defaults.withCredentials = true;
-        axios.get("https://backendofmedify.onrender.com/address" , {
+        axios.get("http://localhost:5000/address" , {
             headers:{
                 "Authorization" : "Bearer " + localStorage.getItem("token")
             }
@@ -57,7 +57,7 @@ export default function Payment() {
 
     const onSubmit = (data) => {
         axios.defaults.withCredentials = true;
-        axios.post("https://backendofmedify.onrender.com/addAddress", data , {
+        axios.post("http://localhost:5000/addAddress", data , {
             headers: {
                 "Content-Type": "application/json",
                 "Authorization" : "Bearer " + localStorage.getItem("token")
@@ -104,9 +104,9 @@ export default function Payment() {
                     <div className="address">
                         <p className="ppp"><p>DELEVERY ADDRESS</p></p>
                         {
-                            address.map(item => {
+                            address.map((item , i) => {
                                 return (
-                                    <div className="contentOfAddress" onClick={()=>{setFormValue(item)}} key={item.mobile}>
+                                    <div className="contentOfAddress" onClick={()=>{setFormValue(item)}} key={i}>
                                         <span style={{ fontWeight: "bold", marginBottom: "1rem", width: "95%", display: "flex", justifyContent: "space-between" }}><b>{item.first} {item.last} </b> <input type="radio" name="address" onChange={()=>{
                                             setFormValue(item) 
                                         }} checked={formValue == item}/></span>
