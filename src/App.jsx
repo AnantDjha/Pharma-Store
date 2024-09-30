@@ -30,7 +30,7 @@ function App() {
       localStorage.setItem("token", "")
     }
     axios.defaults.withCredentials = true
-    axios.get("http://localhost:5000/user", {
+    axios.get("https://backendofmedify.onrender.com/user", {
       headers: {
         "Authorization": "Bearer " + localStorage.getItem("token")
       }
@@ -48,7 +48,7 @@ function App() {
 
   useEffect(() => {
     axios.defaults.withCredentials = true;
-    axios.post("http://localhost:5000/getCart", { email: user?.value?.email },
+    axios.post("https://backendofmedify.onrender.com/getCart", { email: user?.value?.email },
       {
         headers: {
           "Content-Type": "application/json",
@@ -90,4 +90,4 @@ function App() {
 export default App;
 
 
-// http://localhost:5000
+// https://backendofmedify.onrender.com
